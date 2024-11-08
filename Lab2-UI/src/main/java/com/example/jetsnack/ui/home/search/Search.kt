@@ -145,6 +145,7 @@ fun filteredSnackCategories(tagline: String){
         WorkInfo.State.RUNNING -> Text("Filtrando productos")
         WorkInfo.State.SUCCEEDED -> {
             val filteredSnacks = workInfo.value?.outputData?.getString("KEY_SNACK")
+            Text("Snacks filtrados: $filteredSnacks")
         }
         WorkInfo.State.FAILED -> Text("Ha fallado el filtrado")
         else -> Text("Esperando a que empiece el filtrado")
