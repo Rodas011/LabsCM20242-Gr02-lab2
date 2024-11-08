@@ -59,8 +59,9 @@ fun Feed(
     modifier: Modifier = Modifier,
     //snackViewModel: SnackViewModel = viewModel()
 ) {
-    val snackViewModel: SnackViewModel = viewModel()
-    var snackCollections = remember { SnackRepo.getSnacks() }
+    val snackViewModel: SnackViewModel = viewModel(factory = SnackViewModel.Factory)
+    //var snackCollections = remember { SnackRepo.getSnacks() }
+    var snackCollections by remember { mutableStateOf(emptyList<SnackCollection>()) }
     val filters = remember { SnackRepo.getFilters() }
     val snackUiState = snackViewModel.snackUiState
     when (snackUiState) {

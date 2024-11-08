@@ -16,16 +16,7 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-object SnackApi {
-    val retrofitService : SnackApiService by lazy {
-        retrofit.create(SnackApiService::class.java)
-    }
-}
-
 interface SnackApiService {
-    @GET("snacks")
-    suspend fun getSnacks(): List<Snack>
-
     @GET("snackCollection")
-    suspend fun getSnackCollection(): List<SnackCollection>
+    suspend fun getSnacks(): List<SnackCollection>
 }

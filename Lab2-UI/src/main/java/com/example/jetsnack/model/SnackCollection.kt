@@ -51,6 +51,7 @@ object SnackRepo {
  * Static data
  */
 
+
 private val tastyTreats = SnackCollection(
     id = "1",
     name = "Android's picks",
@@ -96,6 +97,7 @@ private val snackCollections = listOf(
     newlyAdded,
     exclusive
 )
+
 
 private val related = listOf(
     also.copy(id = "${Random.nextLong()}"),
