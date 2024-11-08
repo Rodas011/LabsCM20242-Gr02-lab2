@@ -20,7 +20,9 @@ class SnackFilterWorker(
 
         val filteredSnacks =  snacks.filter { it.tagline == category }
 
-        val outputData = workDataOf("KEY_SNACK" to filteredSnacks)
+        val snackCategories = filteredSnacks.joinToString{ it.name }
+
+        val outputData = workDataOf("KEY_SNACK" to snackCategories)
 
         return Result.success(outputData)
     }

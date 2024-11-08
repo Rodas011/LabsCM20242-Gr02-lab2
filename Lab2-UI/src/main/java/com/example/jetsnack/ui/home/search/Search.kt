@@ -16,6 +16,7 @@
 
 package com.example.jetsnack.ui.home.search
 
+import android.content.Context
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,16 +44,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.jetsnack.R
 import com.example.jetsnack.model.Filter
 import com.example.jetsnack.model.SearchCategoryCollection
@@ -62,6 +69,7 @@ import com.example.jetsnack.model.Snack
 import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.ui.components.JetsnackDivider
 import com.example.jetsnack.ui.components.JetsnackSurface
+import com.example.jetsnack.ui.home.SnackFilterWorker
 import com.example.jetsnack.ui.theme.JetsnackTheme
 
 @Composable
@@ -102,14 +110,45 @@ fun Search(
                     onSnackClick
                 )
 
+
+
                 SearchDisplay.NoResults -> NoResults(state.query.text)
             }
+
+            filteredSnackCategories(state.query.text)
         }
     }
 }
 
+
+
 enum class SearchDisplay {
     Categories, Suggestions, Results, NoResults
+}
+
+@Composable
+fun filteredSnackCategories(tagline: String){
+    val context = LocalContext.current
+    val workManager = WorkManager.getInstance(context)
+
+    val filterRequest = remember {
+        OneTimeWorkRequestBuilder<SnackFilterWorker>().setInputData(workDataOf("tagline" to tagline)).build()
+    }
+
+    LaunchedEffect(Unit) {
+        workManager.enqueue(filterRequest)
+    }
+
+    val workInfo = workManager.getWorkInfoByIdLiveData(filterRequest.id).observeAsState()
+
+    when(workInfo.value?.state) {
+        WorkInfo.State.RUNNING -> Text("Filtrando productos")
+        WorkInfo.State.SUCCEEDED -> {
+            val filteredSnacks = workInfo.value?.outputData?.getString("KEY_SNACK")
+        }
+        WorkInfo.State.FAILED -> Text("Ha fallado el filtrado")
+        else -> Text("Esperando a que empiece el filtrado")
+    }
 }
 
 @Composable
