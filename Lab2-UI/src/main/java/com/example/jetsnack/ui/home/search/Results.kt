@@ -86,7 +86,7 @@ private fun SearchResult(
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onSnackClick(snack.id, "search") }
+            .clickable { onSnackClick(snack.id.toLong(), "search") }
             .padding(horizontal = 24.dp)
     ) {
         val (divider, image, name, tag, priceSpacer, price, add) = createRefs()
@@ -150,7 +150,7 @@ private fun SearchResult(
                 }
         )
         Text(
-            text = formatPrice(snack.price),
+            text = formatPrice(snack.price.toLong()),
             style = MaterialTheme.typography.titleMedium,
             color = JetsnackTheme.colors.textPrimary,
             modifier = Modifier.constrainAs(price) {

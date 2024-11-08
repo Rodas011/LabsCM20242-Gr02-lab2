@@ -60,11 +60,11 @@ fun Feed(
     //snackViewModel: SnackViewModel = viewModel()
 ) {
     val snackViewModel: SnackViewModel = viewModel()
-    val snackCollections = remember { SnackRepo.getSnacks() }
+    var snackCollections = remember { SnackRepo.getSnacks() }
     val filters = remember { SnackRepo.getFilters() }
     val snackUiState = snackViewModel.snackUiState
     when (snackUiState) {
-        is SnackUiState.Success -> Text(text = snackUiState.snacks)
+        is SnackUiState.Success -> snackCollections = remember { snackUiState.snacks }
         is SnackUiState.Error -> Text(text = "Error")
         is SnackUiState.Loading -> Text(text = "Cargando")
     }

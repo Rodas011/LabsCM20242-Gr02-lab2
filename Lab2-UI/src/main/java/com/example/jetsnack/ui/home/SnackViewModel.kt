@@ -5,12 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jetsnack.model.SnackCollection
 import com.example.jetsnack.network.SnackApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 sealed interface SnackUiState {
-    data class Success(val snacks: String) : SnackUiState
+    data class Success(val snacks: List<SnackCollection>) : SnackUiState
     object Error : SnackUiState
     object Loading : SnackUiState
 }
@@ -27,7 +28,7 @@ class SnackViewModel : ViewModel() {
     private fun getSnacks() {
         viewModelScope.launch {
             snackUiState = try {
-                val listResult = SnackApi.retrofitService.getSnacks()
+                val listResult = SnackApi.retrofitService.getSnackCollection()
                 SnackUiState.Success(listResult)
             } catch (e: IOException) {
                 SnackUiState.Error

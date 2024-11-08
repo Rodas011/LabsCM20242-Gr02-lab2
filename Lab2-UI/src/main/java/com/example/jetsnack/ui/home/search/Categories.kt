@@ -162,7 +162,7 @@ private fun SearchCategoryPreview() {
         SearchCategory(
             category = SearchCategory(
                 name = "Desserts",
-                imageRes = R.drawable.desserts
+                imageRes = "https://loremflickr.com/640/480/dessert"
             ),
             gradient = JetsnackTheme.colors.gradient3_2
         )
