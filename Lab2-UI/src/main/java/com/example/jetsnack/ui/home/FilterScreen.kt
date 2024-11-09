@@ -73,6 +73,7 @@ import com.example.jetsnack.model.Filter
 import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.ui.FilterSharedElementKey
 import com.example.jetsnack.ui.components.FilterChip
+import com.example.jetsnack.ui.components.FilterSnacksFeed
 import com.example.jetsnack.ui.theme.JetsnackTheme
 
 @Composable
@@ -81,6 +82,7 @@ fun FilterScreen(
     animatedVisibilityScope: AnimatedVisibilityScope,
     onDismiss: () -> Unit,
 ) {
+
     var sortState by remember { mutableStateOf(SnackRepo.getSortDefault()) }
     var maxCalories by remember { mutableFloatStateOf(0f) }
     val defaultFilter = SnackRepo.getSortDefault()
@@ -203,6 +205,8 @@ fun FilterScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun FilterChipSection(title: String, filters: List<Filter>) {
+    var selectedFilter by remember { mutableStateOf<String?>(null) }
+
     FilterTitle(text = title)
     FlowRow(
         modifier = Modifier
@@ -213,8 +217,8 @@ fun FilterChipSection(title: String, filters: List<Filter>) {
         filters.forEach { filter ->
             FilterChip(
                 filter = filter,
-                modifier = Modifier.padding(end = 4.dp, bottom = 8.dp)
-
+                modifier = Modifier.padding(end = 4.dp, bottom = 8.dp),
+                onClick = { filterName -> selectedFilter = filterName}
             )
         }
     }

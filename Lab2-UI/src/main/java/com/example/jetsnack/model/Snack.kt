@@ -29,6 +29,7 @@ data class Snack(
     val imageRes: Int,
     val price: Long,
     val tagline: String = "",
+    val taste: String = "",
     val tags: Set<String> = emptySet()
 )
 
@@ -41,6 +42,7 @@ val snacks = listOf(
         id = 1L,
         name = "Cupcake",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.cupcake,
         price = 299
     ),
@@ -48,6 +50,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Donut",
         tagline = "Vegetarian",
+        taste = "Gluten-free",
         imageRes = R.drawable.donut,
         price = 299
     ),
@@ -55,6 +58,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Eclair",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.eclair,
         price = 299
     ),
@@ -62,12 +66,14 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Froyo",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.froyo,
         price = 299
     ),
     Snack(
         id = Random.nextLong(),
         name = "Gingerbread",
+        taste = "Sweet",
         tagline = "Vegetarian",
         imageRes = R.drawable.gingerbread,
         price = 499
@@ -75,6 +81,7 @@ val snacks = listOf(
     Snack(
         id = Random.nextLong(),
         name = "Honeycomb",
+        taste = "Sweet",
         tagline = "Vegetarian",
         imageRes = R.drawable.honeycomb,
         price = 299
@@ -83,6 +90,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Ice Cream Sandwich",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.ice_cream_sandwich,
         price = 1299
     ),
@@ -90,6 +98,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Jellybean",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.jelly_bean,
         price = 299
     ),
@@ -97,6 +106,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "KitKat",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.kitkat,
         price = 549
     ),
@@ -104,6 +114,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Lollipop",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.lollipop,
         price = 299
     ),
@@ -111,6 +122,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Marshmallow",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.marshmallow,
         price = 299
     ),
@@ -118,6 +130,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Nougat",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.nougat,
         price = 299
     ),
@@ -125,6 +138,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Oreo",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.oreo,
         price = 299
     ),
@@ -132,6 +146,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Pie",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.pie,
         price = 299
     ),
@@ -139,6 +154,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Chips",
         tagline = "Vegan",
+        taste = "Savory",
         imageRes = R.drawable.chips,
         price = 299
     ),
@@ -146,6 +162,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Pretzels",
         tagline = "Vegan",
+        taste = "Savory",
         imageRes = R.drawable.pretzels,
         price = 299
     ),
@@ -153,12 +170,14 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Smoothies",
         tagline = "Vegan",
+        taste = "Sweet",
         imageRes = R.drawable.smoothies,
         price = 299
     ),
     Snack(
         id = Random.nextLong(),
         name = "Popcorn",
+        taste = "Savory",
         tagline = "Gluten Free",
         imageRes = R.drawable.popcorn,
         price = 299
@@ -166,6 +185,7 @@ val snacks = listOf(
     Snack(
         id = Random.nextLong(),
         name = "Almonds",
+        taste = "Dairy-free",
         tagline = "Whole30",
         imageRes = R.drawable.almonds,
         price = 299
@@ -173,6 +193,7 @@ val snacks = listOf(
     Snack(
         id = Random.nextLong(),
         name = "Cheese",
+        taste = "Savory",
         tagline = "Gluten Free",
         imageRes = R.drawable.cheese,
         price = 299
@@ -181,6 +202,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Apples",
         tagline = "Paleo",
+        taste = "Organic",
         imageRes = R.drawable.apples,
         price = 299
     ),
@@ -188,6 +210,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Apple sauce",
         tagline = "Gluten Free",
+        taste = "Sweet",
         imageRes = R.drawable.apple_sauce,
         price = 299
     ),
@@ -195,6 +218,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Apple chips",
         tagline = "Gluten Free",
+        taste = "Sweet",
         imageRes = R.drawable.apple_chips,
         price = 299
     ),
@@ -202,6 +226,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Apple juice",
         tagline = "Gluten Free",
+        taste = "Sweet",
         imageRes = R.drawable.apple_juice,
         price = 299
     ),
@@ -209,6 +234,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Apple pie",
         tagline = "Vegetarian",
+        taste = "Sweet",
         imageRes = R.drawable.apple_pie,
         price = 299
     ),
@@ -216,6 +242,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Grapes",
         tagline = "Organic",
+        taste = "Organic",
         imageRes = R.drawable.grapes,
         price = 299
     ),
@@ -223,6 +250,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Kiwi",
         tagline = "Organic",
+        taste = "Organic",
         imageRes = R.drawable.kiwi,
         price = 299
     ),
@@ -230,6 +258,7 @@ val snacks = listOf(
         id = Random.nextLong(),
         name = "Mango",
         tagline = "Organic",
+        taste = "Organic",
         imageRes = R.drawable.mango,
         price = 299
     )

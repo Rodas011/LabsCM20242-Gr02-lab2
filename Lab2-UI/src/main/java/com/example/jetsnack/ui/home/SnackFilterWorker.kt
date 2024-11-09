@@ -2,6 +2,7 @@ package com.example.jetsnack.ui.home
 
 import android.content.Context
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.example.jetsnack.model.Filter
@@ -18,11 +19,13 @@ class SnackFilterWorker(
 
         val category = inputData.getString("tagline") ?: return Result.failure()
 
-        val filteredSnacks =  snacks.filter { it.tagline == category }
+        val filteredSnacks =  snacks.filter { it.taste == category }
 
-        val snackCategories = filteredSnacks.joinToString{ it.name }
+        val snackArray = filteredSnacks.map { it.name }.toTypedArray()
 
-        val outputData = workDataOf("KEY_SNACK" to snackCategories)
+        val outputData = Data.Builder()
+            .putStringArray("KEY_SNACK", snackArray) // Store as array
+            .build()
 
         return Result.success(outputData)
     }
