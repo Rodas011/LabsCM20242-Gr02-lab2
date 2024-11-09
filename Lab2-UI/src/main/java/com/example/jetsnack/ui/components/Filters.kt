@@ -64,12 +64,12 @@ import androidx.work.workDataOf
 import com.example.jetsnack.R
 import com.example.jetsnack.model.Filter
 import com.example.jetsnack.model.Snack
-import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.model.snacks
 import com.example.jetsnack.ui.FilterSharedElementKey
 import com.example.jetsnack.ui.home.FeedFilterWorker
 import com.example.jetsnack.ui.navigation.rememberJetsnackNavController
 import com.example.jetsnack.ui.theme.JetsnackTheme
+import com.example.jetsnack.ui.home.SnackFilterWorker
 import kotlin.random.Random
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -276,7 +276,7 @@ fun FilterSnacksTaste(tagline: String){
             filteredSnacks = finalSnacks
 
             val snackCollection = com.example.jetsnack.model.SnackCollection(
-                id = Random.nextLong(),
+                id = "${Random.nextLong()}",
                 name = tagline,
                 snacks = finalSnacks
             )
