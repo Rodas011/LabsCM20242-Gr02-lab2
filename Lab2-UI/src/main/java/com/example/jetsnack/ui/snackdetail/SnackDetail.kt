@@ -169,7 +169,7 @@ fun SnackDetail(
                 .sharedBounds(
                     rememberSharedContentState(
                         key = SnackSharedElementKey(
-                            snackId = snack.id,
+                            snackId = snack.id.toLong(),
                             origin = origin,
                             type = SnackSharedElementType.Bounds
                         )
@@ -185,7 +185,7 @@ fun SnackDetail(
                 .background(color = JetsnackTheme.colors.uiBackground)
         ) {
             val scroll = rememberScrollState(0)
-            Header(snack.id, origin = origin)
+            Header(snack.id.toLong(), origin = origin)
             Body(related, scroll)
             Title(snack, origin) { scroll.value }
             Image(snackId, origin, snack.imageRes) { scroll.value }
@@ -425,7 +425,7 @@ private fun Title(snack: Snack, origin: String, scrollProvider: () -> Int) {
                     .sharedBounds(
                         rememberSharedContentState(
                             key = SnackSharedElementKey(
-                                snackId = snack.id,
+                                snackId = snack.id.toLong(),
                                 origin = origin,
                                 type = SnackSharedElementType.Title
                             )
@@ -445,7 +445,7 @@ private fun Title(snack: Snack, origin: String, scrollProvider: () -> Int) {
                     .sharedBounds(
                         rememberSharedContentState(
                             key = SnackSharedElementKey(
-                                snackId = snack.id,
+                                snackId = snack.id.toLong(),
                                 origin = origin,
                                 type = SnackSharedElementType.Tagline
                             )
@@ -458,7 +458,7 @@ private fun Title(snack: Snack, origin: String, scrollProvider: () -> Int) {
             Spacer(Modifier.height(4.dp))
             with(animatedVisibilityScope) {
                 Text(
-                    text = formatPrice(snack.price),
+                    text = formatPrice(snack.price.toLong()),
                     style = MaterialTheme.typography.titleLarge,
                     color = JetsnackTheme.colors.textPrimary,
                     modifier = HzPadding
@@ -479,8 +479,7 @@ private fun Title(snack: Snack, origin: String, scrollProvider: () -> Int) {
 private fun Image(
     snackId: Long,
     origin: String,
-    @DrawableRes
-    imageRes: Int,
+    imageRes: String,
     scrollProvider: () -> Int
 ) {
     val collapseRange = with(LocalDensity.current) { (MaxTitleOffset - MinTitleOffset).toPx() }

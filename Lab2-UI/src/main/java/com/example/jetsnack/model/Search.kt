@@ -45,7 +45,7 @@ data class SearchCategoryCollection(
 @Immutable
 data class SearchCategory(
     val name: String,
-    val imageRes: Int
+    val imageRes: String
 )
 
 @Immutable
@@ -66,19 +66,19 @@ private val searchCategoryCollections = listOf(
         categories = listOf(
             SearchCategory(
                 name = "Chips & crackers",
-                imageRes = R.drawable.chips
+                imageRes = "https://loremflickr.com/640/480/dessert"
             ),
             SearchCategory(
                 name = "Fruit snacks",
-                imageRes = R.drawable.fruit,
+                imageRes = "https://loremflickr.com/640/480/dessert",
             ),
             SearchCategory(
                 name = "Desserts",
-                imageRes = R.drawable.desserts
+                imageRes = "https://loremflickr.com/640/480/dessert"
             ),
             SearchCategory(
                 name = "Nuts",
-                imageRes = R.drawable.nuts,
+                imageRes = "https://loremflickr.com/640/480/dessert",
             )
         )
     ),
@@ -88,27 +88,27 @@ private val searchCategoryCollections = listOf(
         categories = listOf(
             SearchCategory(
                 name = "Organic",
-                imageRes = R.drawable.organic
+                imageRes = "https://loremflickr.com/640/480/dessert"
             ),
             SearchCategory(
                 name = "Gluten Free",
-                imageRes = R.drawable.gluten_free
+                imageRes = "https://loremflickr.com/640/480/dessert"
             ),
             SearchCategory(
                 name = "Paleo",
-                imageRes = R.drawable.paleo,
+                imageRes = "https://loremflickr.com/640/480/dessert",
             ),
             SearchCategory(
                 name = "Vegan",
-                imageRes = R.drawable.vegan,
+                imageRes = "https://loremflickr.com/640/480/dessert",
             ),
             SearchCategory(
                 name = "Vegetarian",
-                imageRes = R.drawable.organic,
+                imageRes = "https://loremflickr.com/640/480/dessert",
             ),
             SearchCategory(
                 name = "Whole30",
-                imageRes = R.drawable.paleo
+                imageRes = "https://loremflickr.com/640/480/dessert"
             )
         )
     )

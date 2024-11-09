@@ -200,7 +200,7 @@ private fun CartContent(
                     fadeOutSpec = itemAnimationSpecFade,
                     placementSpec = itemPlacementSpec
                 ),
-                subtotal = orderLines.sumOf { it.snack.price * it.count },
+                subtotal = orderLines.sumOf { it.snack.price.toLong() * it.count },
                 shippingCosts = 369
             )
         }
@@ -303,7 +303,7 @@ fun CartItem(
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onSnackClick(snack.id, "cart") }
+            .clickable { onSnackClick(snack.id.toLong(), "cart") }
             .background(JetsnackTheme.colors.uiBackground)
             .padding(horizontal = 24.dp)
 
@@ -336,7 +336,7 @@ fun CartItem(
             }
         )
         IconButton(
-            onClick = { removeSnack(snack.id) },
+            onClick = { removeSnack(snack.id.toLong()) },
             modifier = Modifier
                 .constrainAs(remove) {
                     top.linkTo(parent.top)
@@ -372,7 +372,7 @@ fun CartItem(
                 }
         )
         Text(
-            text = formatPrice(snack.price),
+            text = formatPrice(snack.price.toLong()),
             style = MaterialTheme.typography.titleMedium,
             color = JetsnackTheme.colors.textPrimary,
             modifier = Modifier.constrainAs(price) {
@@ -387,8 +387,8 @@ fun CartItem(
         )
         QuantitySelector(
             count = orderLine.count,
-            decreaseItemCount = { decreaseItemCount(snack.id) },
-            increaseItemCount = { increaseItemCount(snack.id) },
+            decreaseItemCount = { decreaseItemCount(snack.id.toLong()) },
+            increaseItemCount = { increaseItemCount(snack.id.toLong()) },
             modifier = Modifier.constrainAs(quantity) {
                 baseline.linkTo(price.baseline)
                 end.linkTo(parent.end)

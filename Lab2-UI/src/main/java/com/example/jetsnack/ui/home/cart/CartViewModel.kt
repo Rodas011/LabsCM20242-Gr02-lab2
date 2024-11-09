@@ -45,7 +45,7 @@ class CartViewModel(
 
     fun increaseSnackCount(snackId: Long) {
         if (!shouldRandomlyFail()) {
-            val currentCount = _orderLines.value.first { it.snack.id == snackId }.count
+            val currentCount = _orderLines.value.first { it.snack.id.toLong() == snackId }.count
             updateSnackCount(snackId, currentCount + 1)
         } else {
             snackbarManager.showMessage(R.string.cart_increase_error)
@@ -54,7 +54,7 @@ class CartViewModel(
 
     fun decreaseSnackCount(snackId: Long) {
         if (!shouldRandomlyFail()) {
-            val currentCount = _orderLines.value.first { it.snack.id == snackId }.count
+            val currentCount = _orderLines.value.first { it.snack.id.toLong() == snackId }.count
             if (currentCount == 1) {
                 // remove snack from cart
                 removeSnack(snackId)
@@ -68,12 +68,12 @@ class CartViewModel(
     }
 
     fun removeSnack(snackId: Long) {
-        _orderLines.value = _orderLines.value.filter { it.snack.id != snackId }
+        _orderLines.value = _orderLines.value.filter { it.snack.id.toLong() != snackId }
     }
 
     private fun updateSnackCount(snackId: Long, count: Int) {
         _orderLines.value = _orderLines.value.map {
-            if (it.snack.id == snackId) {
+            if (it.snack.id.toLong() == snackId) {
                 it.copy(count = count)
             } else {
                 it

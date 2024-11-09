@@ -127,10 +127,10 @@ fun SnackCollection(
                 )
             }
         }
-        if (highlight && snackCollection.type == CollectionType.Highlight) {
-            HighlightedSnacks(snackCollection.id, index, snackCollection.snacks, onSnackClick)
+        if (highlight && snackCollection.type == "Highlight") {
+            HighlightedSnacks(snackCollection.id.toLong(), index, snackCollection.snacks, onSnackClick)
         } else {
-            Snacks(snackCollection.id, snackCollection.snacks, onSnackClick)
+            Snacks(snackCollection.id.toLong(), snackCollection.snacks, onSnackClick)
         }
     }
 }
@@ -219,7 +219,7 @@ fun SnackItem(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .clickable(onClick = {
-                        onSnackClick(snack.id, snackCollectionId.toString())
+                        onSnackClick(snack.id.toLong(), snackCollectionId.toString())
                     })
                     .padding(8.dp)
             ) {
@@ -232,7 +232,7 @@ fun SnackItem(
                         .sharedBounds(
                             rememberSharedContentState(
                                 key = SnackSharedElementKey(
-                                    snackId = snack.id,
+                                    snackId = snack.id.toLong(),
                                     origin = snackCollectionId.toString(),
                                     type = SnackSharedElementType.Image
                                 )
@@ -251,7 +251,7 @@ fun SnackItem(
                         .sharedBounds(
                             rememberSharedContentState(
                                 key = SnackSharedElementKey(
-                                    snackId = snack.id,
+                                    snackId = snack.id.toLong(),
                                     origin = snackCollectionId.toString(),
                                     type = SnackSharedElementType.Title
                                 )
@@ -299,7 +299,7 @@ private fun HighlightSnackItem(
                 .sharedBounds(
                     sharedContentState = rememberSharedContentState(
                         key = SnackSharedElementKey(
-                            snackId = snack.id,
+                            snackId = snack.id.toLong(),
                             origin = snackCollectionId.toString(),
                             type = SnackSharedElementType.Bounds
                         )
@@ -329,7 +329,7 @@ private fun HighlightSnackItem(
                 modifier = Modifier
                     .clickable(onClick = {
                         onSnackClick(
-                            snack.id,
+                            snack.id.toLong(),
                             snackCollectionId.toString()
                         )
                     })
@@ -346,7 +346,7 @@ private fun HighlightSnackItem(
                             .sharedBounds(
                                 rememberSharedContentState(
                                     key = SnackSharedElementKey(
-                                        snackId = snack.id,
+                                        snackId = snack.id.toLong(),
                                         origin = snackCollectionId.toString(),
                                         type = SnackSharedElementType.Background
                                     )
@@ -381,7 +381,7 @@ private fun HighlightSnackItem(
                             .sharedBounds(
                                 rememberSharedContentState(
                                     key = SnackSharedElementKey(
-                                        snackId = snack.id,
+                                        snackId = snack.id.toLong(),
                                         origin = snackCollectionId.toString(),
                                         type = SnackSharedElementType.Image
                                     )
@@ -408,7 +408,7 @@ private fun HighlightSnackItem(
                         .sharedBounds(
                             rememberSharedContentState(
                                 key = SnackSharedElementKey(
-                                    snackId = snack.id,
+                                    snackId = snack.id.toLong(),
                                     origin = snackCollectionId.toString(),
                                     type = SnackSharedElementType.Title
                                 )
@@ -432,7 +432,7 @@ private fun HighlightSnackItem(
                         .sharedBounds(
                             rememberSharedContentState(
                                 key = SnackSharedElementKey(
-                                    snackId = snack.id,
+                                    snackId = snack.id.toLong(),
                                     origin = snackCollectionId.toString(),
                                     type = SnackSharedElementType.Tagline
                                 )
@@ -460,8 +460,7 @@ fun debugPlaceholder(@DrawableRes debugPreview: Int) =
 
 @Composable
 fun SnackImage(
-    @DrawableRes
-    imageRes: Int,
+    imageRes: String,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     elevation: Dp = 0.dp
@@ -473,10 +472,7 @@ fun SnackImage(
     ) {
 
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(imageRes)
-                .crossfade(true)
-                .build(),
+            model = imageRes,
             placeholder = debugPlaceholder(debugPreview = R.drawable.placeholder),
             contentDescription = contentDescription,
             modifier = Modifier.fillMaxSize(),
