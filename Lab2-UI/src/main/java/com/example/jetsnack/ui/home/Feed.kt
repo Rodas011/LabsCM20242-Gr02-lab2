@@ -134,7 +134,8 @@ private fun SnackCollectionList(
                 filters,
                 sharedTransitionScope = sharedTransitionScope,
                 filterScreenVisible = filtersVisible,
-                onShowFilters = onFiltersSelected
+                onShowFilters = onFiltersSelected,
+                onSnackClick = onSnackClick
             )
         }
         itemsIndexed(snackCollections) { index, snackCollection ->

@@ -79,7 +79,7 @@ import com.example.jetsnack.ui.theme.JetsnackTheme
 fun FilterScreen(
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     var sortState by remember { mutableStateOf(SnackRepo.getSortDefault()) }
     var maxCalories by remember { mutableFloatStateOf(0f) }
@@ -178,7 +178,7 @@ fun FilterScreen(
                 )
                 FilterChipSection(
                     title = stringResource(id = R.string.price),
-                    filters = priceFilters
+                    filters = priceFilters,
                 )
                 FilterChipSection(
                     title = stringResource(id = R.string.category),
@@ -214,6 +214,7 @@ fun FilterChipSection(title: String, filters: List<Filter>) {
             FilterChip(
                 filter = filter,
                 modifier = Modifier.padding(end = 4.dp, bottom = 8.dp)
+
             )
         }
     }
@@ -319,6 +320,7 @@ fun SortOption(
     }
 }
 
+/*
 @Preview("filter screen")
 @Composable
 fun FilterScreenPreview() {
@@ -328,9 +330,12 @@ fun FilterScreenPreview() {
                 FilterScreen(
                     animatedVisibilityScope = this,
                     sharedTransitionScope = this@SharedTransitionLayout,
-                    onDismiss = {}
+                    onDismiss = {},
                 )
             }
         }
     }
 }
+
+ */
+

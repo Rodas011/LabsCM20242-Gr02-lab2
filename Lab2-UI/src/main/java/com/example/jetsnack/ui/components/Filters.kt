@@ -42,26 +42,41 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.jetsnack.R
 import com.example.jetsnack.model.Filter
+import com.example.jetsnack.model.SnackRepo
+import com.example.jetsnack.model.snacks
 import com.example.jetsnack.ui.FilterSharedElementKey
+import com.example.jetsnack.ui.home.FeedFilterWorker
+import com.example.jetsnack.ui.home.SnackFilterWorker
+import com.example.jetsnack.ui.navigation.rememberJetsnackNavController
 import com.example.jetsnack.ui.theme.JetsnackTheme
+import kotlin.random.Random
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun FilterBar(
     filters: List<Filter>,
     onShowFilters: () -> Unit,
     filterScreenVisible: Boolean,
-    sharedTransitionScope: SharedTransitionScope
+    sharedTransitionScope: SharedTransitionScope,
+    onSnackClick: (Long, String) -> Unit
 ) {
     with(sharedTransitionScope) {
         LazyRow(
@@ -141,6 +156,11 @@ fun FilterChip(
             } else {
                 Modifier.background(Color.Transparent)
             }
+
+        if(pressed){
+            FilterSnacksFeed(filter.name)
+        }
+
         Box(
             modifier = Modifier
                 .toggleable(
@@ -165,6 +185,54 @@ fun FilterChip(
     }
 }
 
+@Composable
+fun FilterSnacksFeed(tagline: String){
+    val context = LocalContext.current
+    val workManager = WorkManager.getInstance(context)
+    val jetsnackNavController = rememberJetsnackNavController()
+
+
+    val filterRequest = remember {
+        OneTimeWorkRequestBuilder<FeedFilterWorker>().setInputData(workDataOf("tagline" to tagline)).build()
+    }
+
+    LaunchedEffect(Unit) {
+        workManager.enqueue(filterRequest)
+    }
+
+    val workInfo = workManager.getWorkInfoByIdLiveData(filterRequest.id).observeAsState()
+
+    when(workInfo.value?.state) {
+        WorkInfo.State.RUNNING -> Text("Filtrando productos")
+        WorkInfo.State.SUCCEEDED -> {
+            val filteredSnacks = workInfo.value?.outputData?.getStringArray("KEY_SNACK")
+
+            val selectedSnacks = filteredSnacks?.filterNotNull()?.toSet()
+
+            val finalSnacks = snacks.filter { it.name in selectedSnacks.orEmpty() }
+
+            val snackCollection = com.example.jetsnack.model.SnackCollection(
+                id = Random.nextLong(),
+                name = tagline,
+                snacks = finalSnacks
+            )
+
+            SnackCollection(
+                snackCollection = snackCollection,
+                onSnackClick = { id, origin -> jetsnackNavController::navigateToSnackDetail }
+            )
+
+
+
+
+        }
+        WorkInfo.State.FAILED -> Text("Ha fallado el filtrado")
+        else -> Text("Esperando a que empiece el filtrado")
+    }
+}
+
+
+
 @Preview("default")
 @Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview("large font", fontScale = 2f)
@@ -184,3 +252,5 @@ private fun FilterEnabledPreview() {
         FilterChip(Filter(name = "Demo", enabled = true))
     }
 }
+
+

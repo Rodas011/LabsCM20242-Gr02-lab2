@@ -32,199 +32,216 @@ data class Snack(
     val tags: ArrayList<String> = arrayListOf()
 )
 
+@Immutable
+data class Snack1(
+    val id: Long,
+    val name: String,
+    @DrawableRes
+    val imageRes: Int,
+    val price: Long,
+    val tagline: String = "",
+    val tags: Set<String> = emptySet()
+)
+
 /**
  * Static data
  */
 
 val snacks = listOf(
-    Snack(
-        id = "1",
+    Snack1(
+        id = 1L,
         name = "Cupcake",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.cupcake,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Donut",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.donut,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Eclair",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.eclair,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Froyo",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.froyo,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Gingerbread",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "499"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.gingerbread,
+        price = 499
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Honeycomb",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.honeycomb,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Ice Cream Sandwich",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "1299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.ice_cream_sandwich,
+        price = 1299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Jellybean",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.jelly_bean,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "KitKat",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "549"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.kitkat,
+        price = 549
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Lollipop",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.lollipop,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Marshmallow",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.marshmallow,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Nougat",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.nougat,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Oreo",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.oreo,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Pie",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.pie,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Chips",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegan",
+        imageRes = R.drawable.chips,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Pretzels",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegan",
+        imageRes = R.drawable.pretzels,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Smoothies",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegan",
+        imageRes = R.drawable.smoothies,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Popcorn",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Gluten Free",
+        imageRes = R.drawable.popcorn,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Almonds",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Whole30",
+        imageRes = R.drawable.almonds,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Cheese",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Gluten Free",
+        imageRes = R.drawable.cheese,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Apples",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Paleo",
+        imageRes = R.drawable.apples,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Apple sauce",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Gluten Free",
+        imageRes = R.drawable.apple_sauce,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Apple chips",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Gluten Free",
+        imageRes = R.drawable.apple_chips,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Apple juice",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Gluten Free",
+        imageRes = R.drawable.apple_juice,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Apple pie",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Vegetarian",
+        imageRes = R.drawable.apple_pie,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Grapes",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Organic",
+        imageRes = R.drawable.grapes,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Kiwi",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Organic",
+        imageRes = R.drawable.kiwi,
+        price = 299
     ),
-    Snack(
-        id = "${Random.nextLong()}",
+    Snack1(
+        id = Random.nextLong(),
         name = "Mango",
-        tagline = "A tag line",
-        imageRes = "https://loremflickr.com/640/480/dessert",
-        price = "299"
+        tagline = "Organic",
+        imageRes = R.drawable.mango,
+        price = 299
     )
 )
