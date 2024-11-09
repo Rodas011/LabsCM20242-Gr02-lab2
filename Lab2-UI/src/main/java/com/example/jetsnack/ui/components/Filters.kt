@@ -37,6 +37,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FilterList
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -45,7 +46,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -60,6 +63,8 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.example.jetsnack.R
 import com.example.jetsnack.model.Filter
+import com.example.jetsnack.model.Snack
+import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.model.snacks
 import com.example.jetsnack.ui.FilterSharedElementKey
 import com.example.jetsnack.ui.home.FeedFilterWorker
@@ -76,6 +81,9 @@ fun FilterBar(
     sharedTransitionScope: SharedTransitionScope,
     onSnackClick: (Long, String) -> Unit
 ) {
+
+    var selectedFilter by remember { mutableStateOf<String?>(null) }
+
     with(sharedTransitionScope) {
         LazyRow(
             verticalAlignment = Alignment.CenterVertically,
@@ -107,9 +115,14 @@ fun FilterBar(
                 }
             }
             items(filters) { filter ->
-                FilterChip(filter = filter, shape = MaterialTheme.shapes.small)
+                FilterChip(filter = filter, shape = MaterialTheme.shapes.small, onClick = { filterName -> selectedFilter = filterName})
             }
+
+
         }
+    }
+    selectedFilter?.let {
+        FilterSnacksTaste(tagline = it)
     }
 }
 
@@ -117,7 +130,8 @@ fun FilterBar(
 fun FilterChip(
     filter: Filter,
     modifier: Modifier = Modifier,
-    shape: Shape = MaterialTheme.shapes.small
+    shape: Shape = MaterialTheme.shapes.small,
+    onClick: (String) -> Unit
 ) {
     val (selected, setSelected) = filter.enabled
     val backgroundColor by animateColorAsState(
@@ -155,15 +169,14 @@ fun FilterChip(
                 Modifier.background(Color.Transparent)
             }
 
-        if(pressed){
-            FilterSnacksFeed(filter.name)
-        }
-
         Box(
             modifier = Modifier
                 .toggleable(
                     value = selected,
-                    onValueChange = setSelected,
+                    onValueChange = {
+                        setSelected(it)
+                        onClick(filter.name)
+                    },
                     interactionSource = interactionSource,
                     indication = null
                 )
@@ -225,13 +238,79 @@ fun FilterSnacksFeed(tagline: String){
     }
 }
 
+@Composable
+fun FilterSnacksTaste(tagline: String){
+    val context = LocalContext.current
+    val workManager = WorkManager.getInstance(context)
+    val jetsnackNavController = rememberJetsnackNavController()
+
+    var filteredSnacks by remember { mutableStateOf<List<Snack>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(true) }
+
+    val filterRequest = remember {
+        OneTimeWorkRequestBuilder<SnackFilterWorker>().setInputData(workDataOf("tagline" to tagline)).build()
+    }
+
+    LaunchedEffect(tagline) {
+        isLoading = true
+        workManager.enqueue(filterRequest)
+    }
+
+    val workInfo = workManager.getWorkInfoByIdLiveData(filterRequest.id).observeAsState()
+
+    when(workInfo.value?.state) {
+        WorkInfo.State.RUNNING -> {
+            isLoading = true
+            Text("Filtrando productos")
+        }
+        WorkInfo.State.SUCCEEDED -> {
+            isLoading = false
+            // Extract the filtered snack names from the worker output
+            val snackNames = workInfo.value?.outputData?.getStringArray("KEY_SNACK")
+            val filteredSnackNames = snackNames?.filterNotNull()?.toSet() ?: emptySet()
+
+            // Filter the snacks based on the snack names
+            val finalSnacks = snacks.filter { it.name in filteredSnackNames }
+
+            // Update the filtered snacks state
+            filteredSnacks = finalSnacks
+
+            val snackCollection = com.example.jetsnack.model.SnackCollection(
+                id = Random.nextLong(),
+                name = tagline,
+                snacks = finalSnacks
+            )
+
+            SnackCollection(
+                snackCollection = snackCollection,
+                onSnackClick = { id, origin -> jetsnackNavController::navigateToSnackDetail }
+            )
+
+        }
+        WorkInfo.State.FAILED -> {
+            isLoading = false
+            Text("Ha fallado el filtrado")
+        }
+        else -> {
+            isLoading = false
+            Text("Esperando a que empiece el filtrado")
+        }
+    }
+
+    if (isLoading) {
+        CircularProgressIndicator()
+    }
+}
+
 @Preview("default")
 @Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview("large font", fontScale = 2f)
 @Composable
 private fun FilterDisabledPreview() {
     JetsnackTheme {
-        FilterChip(Filter(name = "Demo", enabled = false), Modifier.padding(4.dp))
+        var selectedFilter by remember { mutableStateOf<String?>(null) }
+
+        FilterChip(Filter(name = "Demo", enabled = false), Modifier.padding(4.dp), onClick = { filterName -> selectedFilter = filterName})
     }
 }
 
@@ -241,7 +320,9 @@ private fun FilterDisabledPreview() {
 @Composable
 private fun FilterEnabledPreview() {
     JetsnackTheme {
-        FilterChip(Filter(name = "Demo", enabled = true))
+        var selectedFilter by remember { mutableStateOf<String?>(null) }
+
+        FilterChip(Filter(name = "Demo", enabled = true), onClick = { filterName -> selectedFilter = filterName} )
     }
 }
 
