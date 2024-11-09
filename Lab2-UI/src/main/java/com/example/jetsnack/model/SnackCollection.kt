@@ -17,14 +17,15 @@
 package com.example.jetsnack.model
 
 import androidx.compose.runtime.Immutable
+import kotlinx.serialization.Serializable
 import kotlin.random.Random
 
-@Immutable
+@Serializable
 data class SnackCollection(
-    val id: Long,
+    val id: String,
     val name: String,
     val snacks: List<Snack>,
-    val type: CollectionType = CollectionType.Normal
+    val type: String = "Normal"
 )
 
 enum class CollectionType { Normal, Highlight }
@@ -34,7 +35,7 @@ enum class CollectionType { Normal, Highlight }
  */
 object SnackRepo {
     fun getSnacks(): List<SnackCollection> = snackCollections
-    fun getSnack(snackId: Long) = snacks.find { it.id == snackId }!!
+    fun getSnack(snackId: Long) = snacks.find { it.id.toLong() == snackId }!!
     fun getRelated(@Suppress("UNUSED_PARAMETER") snackId: Long) = related
     fun getInspiredByCart() = inspiredByCart
     fun getFilters() = filters
@@ -50,41 +51,42 @@ object SnackRepo {
  * Static data
  */
 
+
 private val tastyTreats = SnackCollection(
-    id = 1L,
+    id = "1",
     name = "Android's picks",
-    type = CollectionType.Highlight,
+    type = "Highlight",
     snacks = snacks.subList(0, 13)
 )
 
 private val popular = SnackCollection(
-    id = Random.nextLong(),
+    id = "${Random.nextLong()}",
     name = "Popular on Jetsnack",
     snacks = snacks.subList(14, 19)
 )
 
 private val wfhFavs = tastyTreats.copy(
-    id = Random.nextLong(),
+    id = "${Random.nextLong()}",
     name = "WFH favourites"
 )
 
 private val newlyAdded = popular.copy(
-    id = Random.nextLong(),
+    id = "${Random.nextLong()}",
     name = "Newly Added"
 )
 
 private val exclusive = tastyTreats.copy(
-    id = Random.nextLong(),
+    id = "${Random.nextLong()}",
     name = "Only on Jetsnack"
 )
 
 private val also = tastyTreats.copy(
-    id = Random.nextLong(),
+    id = "${Random.nextLong()}",
     name = "Customers also bought"
 )
 
 private val inspiredByCart = tastyTreats.copy(
-    id = Random.nextLong(),
+    id = "${Random.nextLong()}",
     name = "Inspired by your cart"
 )
 
@@ -96,9 +98,10 @@ private val snackCollections = listOf(
     exclusive
 )
 
+
 private val related = listOf(
-    also.copy(id = Random.nextLong()),
-    popular.copy(id = Random.nextLong())
+    also.copy(id = "${Random.nextLong()}"),
+    popular.copy(id = "${Random.nextLong()}")
 )
 
 private val cart = listOf(

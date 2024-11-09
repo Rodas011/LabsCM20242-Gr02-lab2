@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,6 +43,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetsnack.model.Filter
 import com.example.jetsnack.model.SnackCollection
 import com.example.jetsnack.model.SnackRepo
@@ -54,10 +56,14 @@ import com.example.jetsnack.ui.theme.JetsnackTheme
 @Composable
 fun Feed(
     onSnackClick: (Long, String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    snackViewModel: SnackViewModel = viewModel(factory = SnackViewModel.Factory)
 ) {
-    val snackCollections = remember { SnackRepo.getSnacks() }
+    val snackUiState by snackViewModel.snackUiState.collectAsState()
+
+    val snackCollections = snackUiState.snacks
     val filters = remember { SnackRepo.getFilters() }
+
     Feed(
         snackCollections,
         filters,

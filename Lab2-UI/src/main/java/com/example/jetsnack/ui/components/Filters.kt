@@ -68,7 +68,6 @@ import com.example.jetsnack.model.SnackRepo
 import com.example.jetsnack.model.snacks
 import com.example.jetsnack.ui.FilterSharedElementKey
 import com.example.jetsnack.ui.home.FeedFilterWorker
-import com.example.jetsnack.ui.home.SnackFilterWorker
 import com.example.jetsnack.ui.navigation.rememberJetsnackNavController
 import com.example.jetsnack.ui.theme.JetsnackTheme
 import kotlin.random.Random
@@ -203,7 +202,6 @@ fun FilterSnacksFeed(tagline: String){
     val workManager = WorkManager.getInstance(context)
     val jetsnackNavController = rememberJetsnackNavController()
 
-
     val filterRequest = remember {
         OneTimeWorkRequestBuilder<FeedFilterWorker>().setInputData(workDataOf("tagline" to tagline)).build()
     }
@@ -224,7 +222,7 @@ fun FilterSnacksFeed(tagline: String){
             val finalSnacks = snacks.filter { it.name in selectedSnacks.orEmpty() }
 
             val snackCollection = com.example.jetsnack.model.SnackCollection(
-                id = Random.nextLong(),
+                id = "${Random.nextLong()}",
                 name = tagline,
                 snacks = finalSnacks
             )
@@ -233,9 +231,6 @@ fun FilterSnacksFeed(tagline: String){
                 snackCollection = snackCollection,
                 onSnackClick = { id, origin -> jetsnackNavController::navigateToSnackDetail }
             )
-
-
-
 
         }
         WorkInfo.State.FAILED -> Text("Ha fallado el filtrado")
@@ -306,9 +301,6 @@ fun FilterSnacksTaste(tagline: String){
         CircularProgressIndicator()
     }
 }
-
-
-
 
 @Preview("default")
 @Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
