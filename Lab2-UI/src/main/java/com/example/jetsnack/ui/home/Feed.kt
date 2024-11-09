@@ -34,8 +34,8 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -57,18 +57,12 @@ import com.example.jetsnack.ui.theme.JetsnackTheme
 fun Feed(
     onSnackClick: (Long, String) -> Unit,
     modifier: Modifier = Modifier,
-    //snackViewModel: SnackViewModel = viewModel()
+    snackViewModel: SnackViewModel = viewModel(factory = SnackViewModel.Factory)
 ) {
-    val snackViewModel: SnackViewModel = viewModel(factory = SnackViewModel.Factory)
-    //var snackCollections = remember { SnackRepo.getSnacks() }
-    var snackCollections by remember { mutableStateOf(emptyList<SnackCollection>()) }
+    val snackUiState by snackViewModel.snackUiState.collectAsState()
+
+    val snackCollections = snackUiState.snacks
     val filters = remember { SnackRepo.getFilters() }
-    val snackUiState = snackViewModel.snackUiState
-    when (snackUiState) {
-        is SnackUiState.Success -> snackCollections = remember { snackUiState.snacks }
-        is SnackUiState.Error -> Text(text = "Error")
-        is SnackUiState.Loading -> Text(text = "Cargando")
-    }
 
     Feed(
         snackCollections,

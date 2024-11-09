@@ -7,6 +7,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL =
     "https://672e2712229a881691ef27c1.mockapi.io/Jetsnacks/"
@@ -19,4 +20,7 @@ private val retrofit = Retrofit.Builder()
 interface SnackApiService {
     @GET("snackCollection")
     suspend fun getSnacks(): List<SnackCollection>
+
+    @GET("snacks/{snackId}")
+    suspend fun getSnack(@Path("snackId") snackId: Long): Snack
 }

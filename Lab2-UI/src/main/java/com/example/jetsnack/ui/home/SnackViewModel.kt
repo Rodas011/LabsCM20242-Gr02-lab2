@@ -10,22 +10,29 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.jetsnack.JetsnackApplication
-import com.example.jetsnack.data.NetworkSnackRepository
 import com.example.jetsnack.data.SnackRepository
 import com.example.jetsnack.model.SnackCollection
+import com.example.jetsnack.model.Snack
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
-sealed interface SnackUiState {
-    data class Success(val snacks: List<SnackCollection>) : SnackUiState
-    object Error : SnackUiState
-    object Loading : SnackUiState
-}
+
+data class SnackUiState (
+    val snacks: List<SnackCollection> = emptyList(),
+    val snack: Snack? = null
+)
 
 class SnackViewModel(private val snackRepository: SnackRepository) : ViewModel() {
 
-    var snackUiState: SnackUiState by mutableStateOf(SnackUiState.Loading)
+    private val _snackUiState = MutableStateFlow(SnackUiState())
+    val snackUiState: StateFlow<SnackUiState> = _snackUiState.asStateFlow()
+
+    var snacks: List<SnackCollection> by mutableStateOf(emptyList())
+        private set
+
+    var snack: Snack? by mutableStateOf(null)
         private set
 
     init {
@@ -34,14 +41,15 @@ class SnackViewModel(private val snackRepository: SnackRepository) : ViewModel()
 
     private fun getSnacks() {
         viewModelScope.launch {
-            snackUiState = try {
-                val listResult = snackRepository.getSnacks()
-                SnackUiState.Success(listResult)
-            } catch (e: IOException) {
-                SnackUiState.Error
-            } catch (e: HttpException) {
-                SnackUiState.Error
-            }
+            val listResult = snackRepository.getSnacks()
+            _snackUiState.value = SnackUiState(snacks = listResult)
+        }
+    }
+
+    fun getSnack(snackId: Long) {
+        viewModelScope.launch {
+            val snackResult = snackRepository.getSnack(snackId)
+            _snackUiState.value = _snackUiState.value.copy(snack = snackResult)
         }
     }
 
@@ -54,5 +62,4 @@ class SnackViewModel(private val snackRepository: SnackRepository) : ViewModel()
             }
         }
     }
-
 }

@@ -144,4 +144,7 @@ dependencies {
     // Retrofit with Kotlin serialization Converter
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.okhttp3)
+
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.runtime.livedata)
 }

@@ -69,6 +69,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
@@ -96,6 +98,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetsnack.R
 import com.example.jetsnack.model.Snack
 import com.example.jetsnack.model.SnackCollection
@@ -111,6 +114,7 @@ import com.example.jetsnack.ui.components.JetsnackSurface
 import com.example.jetsnack.ui.components.QuantitySelector
 import com.example.jetsnack.ui.components.SnackCollection
 import com.example.jetsnack.ui.components.SnackImage
+import com.example.jetsnack.ui.home.SnackViewModel
 import com.example.jetsnack.ui.theme.JetsnackTheme
 import com.example.jetsnack.ui.theme.Neutral8
 import com.example.jetsnack.ui.utils.formatPrice
@@ -146,10 +150,17 @@ val snackDetailBoundsTransform = BoundsTransform { _, _ ->
 fun SnackDetail(
     snackId: Long,
     origin: String,
-    upPress: () -> Unit
+    upPress: () -> Unit,
+    snackViewModel: SnackViewModel = viewModel(factory = SnackViewModel.Factory)
 ) {
-    val snack = remember(snackId) { SnackRepo.getSnack(snackId) }
+    LaunchedEffect(snackId) {
+        snackViewModel.getSnack(snackId)
+    }
+
+    val snackUiState by snackViewModel.snackUiState.collectAsState()
+    val snack = snackUiState.snack
     val related = remember(snackId) { SnackRepo.getRelated(snackId) }
+
     val sharedTransitionScope = LocalSharedTransitionScope.current
         ?: throw IllegalStateException("No Scope found")
     val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
@@ -163,34 +174,36 @@ fun SnackDetail(
             }
         }
     with(sharedTransitionScope) {
-        Box(
-            Modifier
-                .clip(RoundedCornerShape(roundedCornerAnim))
-                .sharedBounds(
-                    rememberSharedContentState(
-                        key = SnackSharedElementKey(
-                            snackId = snack.id.toLong(),
-                            origin = origin,
-                            type = SnackSharedElementType.Bounds
-                        )
-                    ),
-                    animatedVisibilityScope,
-                    clipInOverlayDuringTransition =
-                    OverlayClip(RoundedCornerShape(roundedCornerAnim)),
-                    boundsTransform = snackDetailBoundsTransform,
-                    exit = fadeOut(nonSpatialExpressiveSpring()),
-                    enter = fadeIn(nonSpatialExpressiveSpring()),
-                )
-                .fillMaxSize()
-                .background(color = JetsnackTheme.colors.uiBackground)
-        ) {
-            val scroll = rememberScrollState(0)
-            Header(snack.id.toLong(), origin = origin)
-            Body(related, scroll)
-            Title(snack, origin) { scroll.value }
-            Image(snackId, origin, snack.imageRes) { scroll.value }
-            Up(upPress)
-            CartBottomBar(modifier = Modifier.align(Alignment.BottomCenter))
+        if (snack != null) {
+            Box(
+                Modifier
+                    .clip(RoundedCornerShape(roundedCornerAnim))
+                    .sharedBounds(
+                        rememberSharedContentState(
+                            key = SnackSharedElementKey(
+                                snackId = snack.id.toLong(),
+                                origin = origin,
+                                type = SnackSharedElementType.Bounds
+                            )
+                        ),
+                        animatedVisibilityScope,
+                        clipInOverlayDuringTransition =
+                        OverlayClip(RoundedCornerShape(roundedCornerAnim)),
+                        boundsTransform = snackDetailBoundsTransform,
+                        exit = fadeOut(nonSpatialExpressiveSpring()),
+                        enter = fadeIn(nonSpatialExpressiveSpring()),
+                    )
+                    .fillMaxSize()
+                    .background(color = JetsnackTheme.colors.uiBackground)
+            ) {
+                val scroll = rememberScrollState(0)
+                Header(snack.id.toLong(), origin = origin)
+                Body(related, scroll)
+                Title(snack, origin) { scroll.value }
+                Image(snackId, origin, snack.imageRes) { scroll.value }
+                Up(upPress)
+                CartBottomBar(modifier = Modifier.align(Alignment.BottomCenter))
+            }
         }
     }
 }
@@ -458,7 +471,7 @@ private fun Title(snack: Snack, origin: String, scrollProvider: () -> Int) {
             Spacer(Modifier.height(4.dp))
             with(animatedVisibilityScope) {
                 Text(
-                    text = formatPrice(snack.price.toLong()),
+                    text = snack.price,
                     style = MaterialTheme.typography.titleLarge,
                     color = JetsnackTheme.colors.textPrimary,
                     modifier = HzPadding
@@ -480,7 +493,7 @@ private fun Image(
     snackId: Long,
     origin: String,
     imageRes: String,
-    scrollProvider: () -> Int
+    scrollProvider: () -> Int,
 ) {
     val collapseRange = with(LocalDensity.current) { (MaxTitleOffset - MinTitleOffset).toPx() }
     val collapseFractionProvider = {
