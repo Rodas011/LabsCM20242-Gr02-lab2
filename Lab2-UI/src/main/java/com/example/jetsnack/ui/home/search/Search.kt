@@ -67,6 +67,7 @@ import com.example.jetsnack.model.SearchRepo
 import com.example.jetsnack.model.SearchSuggestionGroup
 import com.example.jetsnack.model.Snack
 import com.example.jetsnack.model.SnackRepo
+import com.example.jetsnack.ui.components.FilterSnacksFeed
 import com.example.jetsnack.ui.components.JetsnackDivider
 import com.example.jetsnack.ui.components.JetsnackSurface
 import com.example.jetsnack.ui.home.SnackFilterWorker
@@ -112,10 +113,10 @@ fun Search(
 
 
 
-                SearchDisplay.NoResults -> NoResults(state.query.text)
+                SearchDisplay.NoResults -> FilterSnacksFeed(state.query.text)
             }
 
-            filteredSnackCategories(state.query.text)
+
         }
     }
 }
