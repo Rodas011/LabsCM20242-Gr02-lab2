@@ -43,7 +43,7 @@ val snacks = listOf(
         name = "Cupcake",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/65535_52008087018_6dd69462da_n_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=11",
         price = "299"
     ),
     Snack(
@@ -51,7 +51,7 @@ val snacks = listOf(
         name = "Donut",
         tagline = "Vegetarian",
         taste = "Gluten-free",
-        imageRes = "https://loremflickr.com/cache/resized/65535_53826762682_e03dec035f_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=12",
         price = "299"
     ),
     Snack(
@@ -59,7 +59,7 @@ val snacks = listOf(
         name = "Eclair",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/65535_51930438915_f6f481211d_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=13",
         price = "299"
     ),
     Snack(
@@ -67,7 +67,7 @@ val snacks = listOf(
         name = "Froyo",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7677_17382412371_a19fe743bf_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=14",
         price = "299"
     ),
     Snack(
@@ -75,7 +75,7 @@ val snacks = listOf(
         name = "Gingerbread",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/65535_53366812664_e25fa19807_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=15",
         price = "499"
     ),
     Snack(
@@ -83,7 +83,7 @@ val snacks = listOf(
         name = "Honeycomb",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/65535_54096474773_13cda30ff4_n_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=16",
         price = "299"
     ),
     Snack(
@@ -91,7 +91,7 @@ val snacks = listOf(
         name = "Ice Cream Sandwich",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/65535_53562688253_f5fd1639f2_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=17",
         price = "1299"
     ),
     Snack(
@@ -99,7 +99,7 @@ val snacks = listOf(
         name = "Jellybean",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/5661_21597823433_848fe1008e_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=18",
         price = "299"
     ),
     Snack(
@@ -107,7 +107,7 @@ val snacks = listOf(
         name = "KitKat",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=19",
         price = "549"
     ),
     Snack(
@@ -115,7 +115,7 @@ val snacks = listOf(
         name = "Lollipop",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=20",
         price = "299"
     ),
     Snack(
@@ -123,7 +123,7 @@ val snacks = listOf(
         name = "Marshmallow",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=21",
         price = "299"
     ),
     Snack(
@@ -131,7 +131,7 @@ val snacks = listOf(
         name = "Nougat",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=22",
         price = "299"
     ),
     Snack(
@@ -139,7 +139,7 @@ val snacks = listOf(
         name = "Oreo",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=23",
         price = "299"
     ),
     Snack(
@@ -147,7 +147,7 @@ val snacks = listOf(
         name = "Pie",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=24",
         price = "299"
     ),
     Snack(
@@ -155,7 +155,7 @@ val snacks = listOf(
         name = "Chips",
         tagline = "Vegan",
         taste = "Savory",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=25",
         price = "299"
     ),
     Snack(
@@ -163,7 +163,7 @@ val snacks = listOf(
         name = "Pretzels",
         tagline = "Vegan",
         taste = "Savory",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=26",
         price = "299"
     ),
     Snack(
@@ -171,7 +171,7 @@ val snacks = listOf(
         name = "Smoothies",
         tagline = "Vegan",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=27",
         price = "299"
     ),
     Snack(
@@ -179,7 +179,7 @@ val snacks = listOf(
         name = "Popcorn",
         tagline = "Gluten Free",
         taste = "Savory",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=28",
         price = "299"
     ),
     Snack(
@@ -187,7 +187,7 @@ val snacks = listOf(
         name = "Almonds",
         tagline = "Whole30",
         taste = "Dairy-free",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=29",
         price = "299"
     ),
     Snack(
@@ -195,7 +195,7 @@ val snacks = listOf(
         name = "Cheese",
         tagline = "Gluten Free",
         taste = "Savory",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=30",
         price = "299"
     ),
     Snack(
@@ -203,7 +203,7 @@ val snacks = listOf(
         name = "Apples",
         tagline = "Paleo",
         taste = "Organic",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=31",
         price = "299"
     ),
     Snack(
@@ -211,7 +211,7 @@ val snacks = listOf(
         name = "Apple sauce",
         tagline = "Gluten Free",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=32",
         price = "299"
     ),
     Snack(
@@ -219,7 +219,7 @@ val snacks = listOf(
         name = "Apple chips",
         tagline = "Gluten Free",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=33",
         price = "299"
     ),
     Snack(
@@ -227,7 +227,7 @@ val snacks = listOf(
         name = "Apple juice",
         tagline = "Gluten Free",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=34",
         price = "299"
     ),
     Snack(
@@ -235,7 +235,7 @@ val snacks = listOf(
         name = "Apple pie",
         tagline = "Vegetarian",
         taste = "Sweet",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=35",
         price = "299"
     ),
     Snack(
@@ -243,7 +243,7 @@ val snacks = listOf(
         name = "Grapes",
         tagline = "Organic",
         taste = "Organic",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=36",
         price = "299"
     ),
     Snack(
@@ -251,7 +251,7 @@ val snacks = listOf(
         name = "Kiwi",
         tagline = "Organic",
         taste = "Organic",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=37",
         price = "299"
     ),
     Snack(
@@ -259,7 +259,7 @@ val snacks = listOf(
         name = "Mango",
         tagline = "Organic",
         taste = "Organic",
-        imageRes = "https://loremflickr.com/cache/resized/7291_15928194223_25c0510a24_320_240_nofilter.jpg",
+        imageRes = "https://loremflickr.com/320/240/dessert?random=38",
         price = "299"
     )
 )

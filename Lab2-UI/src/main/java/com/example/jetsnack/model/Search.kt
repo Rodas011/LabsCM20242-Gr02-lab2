@@ -66,19 +66,19 @@ private val searchCategoryCollections = listOf(
         categories = listOf(
             SearchCategory(
                 name = "Chips & crackers",
-                imageRes = "https://loremflickr.com/640/480/dessert"
+                imageRes = "https://loremflickr.com/320/240/dessert?random=39"
             ),
             SearchCategory(
                 name = "Fruit snacks",
-                imageRes = "https://loremflickr.com/640/480/dessert",
+                imageRes = "https://loremflickr.com/320/240/dessert?random=40",
             ),
             SearchCategory(
                 name = "Desserts",
-                imageRes = "https://loremflickr.com/640/480/dessert"
+                imageRes = "https://loremflickr.com/320/240/dessert?random=41"
             ),
             SearchCategory(
                 name = "Nuts",
-                imageRes = "https://loremflickr.com/640/480/dessert",
+                imageRes = "https://loremflickr.com/320/240/dessert?random=42",
             )
         )
     ),
@@ -88,27 +88,27 @@ private val searchCategoryCollections = listOf(
         categories = listOf(
             SearchCategory(
                 name = "Organic",
-                imageRes = "https://loremflickr.com/640/480/dessert"
+                imageRes = "https://loremflickr.com/320/240/dessert?random=43"
             ),
             SearchCategory(
                 name = "Gluten Free",
-                imageRes = "https://loremflickr.com/640/480/dessert"
+                imageRes = "https://loremflickr.com/320/240/dessert?random=44"
             ),
             SearchCategory(
                 name = "Paleo",
-                imageRes = "https://loremflickr.com/640/480/dessert",
+                imageRes = "https://loremflickr.com/320/240/dessert?random=45",
             ),
             SearchCategory(
                 name = "Vegan",
-                imageRes = "https://loremflickr.com/640/480/dessert",
+                imageRes = "https://loremflickr.com/320/240/dessert?random=46",
             ),
             SearchCategory(
                 name = "Vegetarian",
-                imageRes = "https://loremflickr.com/640/480/dessert",
+                imageRes = "https://loremflickr.com/320/240/dessert?random=47",
             ),
             SearchCategory(
                 name = "Whole30",
-                imageRes = "https://loremflickr.com/640/480/dessert"
+                imageRes = "https://loremflickr.com/320/240/dessert?random=48"
             )
         )
     )
@@ -131,7 +131,7 @@ private val searchSuggestions = listOf(
             "Gluten Free",
             "Paleo",
             "Vegan",
-            "Vegitarian",
+            "Vegetarian",
             "Whole30"
         )
     )
